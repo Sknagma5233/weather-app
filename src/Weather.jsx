@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from "react"
 import axios from "axios"
 import {
@@ -127,52 +126,8 @@ const Weather = () => {
     }
   }
 
-  // Weather insights based on current conditions
-  const getWeatherInsights = () => {
-    if (!weatherData) return []
-
-    const insights = []
-    const temp = weatherData.main.temp
-    const humidity = weatherData.main.humidity
-    const windSpeed = weatherData.wind.speed * 3.6 // Convert to km/h
-    const condition = weatherData.weather[0].main.toLowerCase()
-
-    if (temp > 30) {
-      insights.push({
-        icon: <Thermometer className="w-5 h-5 text-red-500" />,
-        text: "It's quite hot today. Stay hydrated!",
-      })
-    } else if (temp < 10) {
-      insights.push({ icon: <Thermometer className="w-5 h-5 text-blue-500" />, text: "Bundle up! It's cold outside." })
-    }
-
-    if (humidity > 80) {
-      insights.push({
-        icon: <Droplets className="w-5 h-5 text-blue-400" />,
-        text: "High humidity. It might feel muggy.",
-      })
-    }
-
-    if (windSpeed > 20) {
-      insights.push({ icon: <Wind className="w-5 h-5 text-gray-500" />, text: "Windy conditions. Hold onto your hat!" })
-    }
-
-    if (condition === "rain") {
-      insights.push({ icon: <CloudRain className="w-5 h-5 text-blue-500" />, text: "Don't forget your umbrella!" })
-    }
-
-    if (condition === "clear" && temp > 25) {
-      insights.push({
-        icon: <Sun className="w-5 h-5 text-yellow-500" />,
-        text: "Perfect weather for outdoor activities!",
-      })
-    }
-
-    return insights
-  }
-
   return (
-    <div className="h-screen bg-gray-100 flex flex-col lg:flex-row overflow-hidden">
+    <div className="h-screen flex flex-col lg:flex-row overflow-hidden">
       {/* Left Side - Background Image */}
       <div className="w-full lg:w-[60%] h-[50vh] lg:h-full relative overflow-hidden lg:rounded-r-3xl">
         <div
@@ -213,7 +168,7 @@ const Weather = () => {
             <div className="w-12 sm:w-16 h-0.5 bg-white/60 mb-4 lg:mb-8"></div>
           </div>
 
-          {/* Search section at bottom */}
+          {/* Search*/}
           <div className="p-4 sm:p-6 lg:p-8 space-y-3 sm:space-y-4">
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="flex-1 relative">
@@ -358,18 +313,6 @@ const Weather = () => {
                       </p>
                     </div>
                   </div>
-
-                  {/* Dynamic Insights */}
-                  {getWeatherInsights().length > 0 && (
-                    <div className="space-y-3">
-                      {getWeatherInsights().map((insight, index) => (
-                        <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                          {insight.icon}
-                          <span className="text-xs sm:text-sm text-gray-700">{insight.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
 
                   {/* Sun Times */}
                   {weatherData.sys.sunrise && weatherData.sys.sunset && (
