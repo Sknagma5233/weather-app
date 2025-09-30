@@ -9,9 +9,6 @@ import {
   Cloud,
   CloudRain,
   Snowflake,
-  Thermometer,
-  Droplets,
-  Wind,
   Gauge,
   Eye,
 } from "lucide-react"
@@ -25,7 +22,6 @@ const Weather = () => {
 
   const API_KEY = import.meta.env.VITE_OPEN_WEATHER_API_KEY
 
-  // Set background based on weather condition
   useEffect(() => {
     if (!weatherData) {
       setBackgroundImage(
@@ -145,7 +141,7 @@ const Weather = () => {
           {/* Header */}
           <div className="p-4 sm:p-6 lg:p-8">
             <div className="flex items-center justify-between mb-4 lg:mb-8">
-              <h1 className="text-white text-xl sm:text-2xl font-light tracking-wide">forecast</h1>
+              <h1 className="text-white text-xl sm:text-2xl font-light tracking-wide">Forecastly</h1>
               {weatherData && (
                 <div className="flex items-center gap-2 bg-black/30 backdrop-blur-sm rounded-full px-3 sm:px-4 py-2 border border-white/20">
                   <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
